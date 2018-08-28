@@ -68,6 +68,14 @@ class NESTcalcTest(unittest.TestCase):
         cls.it = nestpy.INTERACTION_TYPE(0)
         cls.nestcalc = nestpy.NESTcalc(cls.detector)
 
+        cls.yield_args = (10, # keV
+                          2.9, # g/cm^3
+                          124, # Drift field, V/cm
+                          131.293, # A
+                          54., # Z
+                          (1,1), # nuisance
+                          )
+
     def test_nestcalc_binom_fluct(self):
         binom = self.nestcalc.BinomFluct(1, 20.)
         assert binom > 0
@@ -85,8 +93,13 @@ class NESTcalcTest(unittest.TestCase):
         self.nestcalc.GetPhotonTimes(self.it, 10, 10, 10., 10.)
 
     def test_nestcalc_get_yields(self):
-        yields = self.nestcalc.GetYields(
-            self.it, 10., 10., 10., 10., 10., [1, 1])
+        yields = self.nestcalc.GetYields(self.it,
+                                         *self.yield_args)
+
+    def test_nestcalc_get_yields_all_interactions(self):
+        for i in range(12):
+            yields = self.nestcalc.GetYields(nestpy.nestpy.INTERACTION_TYPE(i)
+                                             *self.yield_args)
 
     def test_nestcalc_get_spike(self):
         self.nestcalc.GetSpike(10, 10., 20., 30., 10., 10., [0, 1, 2])
