@@ -98,7 +98,7 @@ class NESTcalcTest(unittest.TestCase):
 
     def test_nestcalc_get_yields_all_interactions(self):
         for i in range(12):
-            yields = self.nestcalc.GetYields(nestpy.nestpy.INTERACTION_TYPE(i)
+            yields = self.nestcalc.GetYields(nestpy.nestpy.INTERACTION_TYPE(i),
                                              *self.yield_args)
 
     def test_nestcalc_get_spike(self):
