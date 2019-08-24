@@ -20,19 +20,9 @@ matrix:
       - docker
     env: DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64
     language: python
-# No 32 bit, see https://github.com/NESTCollaboration/nest/issues/33
-#  - sudo: required
-#    services:
-#      - docker
-#    env: DOCKER_IMAGE=quay.io/pypa/manylinux1_i686 PRE_CMD=linux32
-#    language: python
   - os: osx
     osx_image: xcode9.4
     env: PYTHON=2.7
-# No longer in conda
-#  - os: osx
-#    osx_image: xcode9.4
-#    env: PYTHON=3.4
   - os: osx
     osx_image: xcode9.4
     env: PYTHON=3.5
@@ -58,10 +48,13 @@ script:
     - if [ "${TRAVIS_OS_NAME}" == "linux" ]; then docker run --rm -v `pwd`:/io $DOCKER_IMAGE $PRE_CMD /io/travis/build-wheels.sh; fi
     - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then python setup.py test; fi
     - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then python setup.py bdist_wheel; fi
-    - if [ "${DEPLOY}" == "me" ]; then python setup.py sdist ; fi
-    - if [ "${DEPLOY}" == "me" ]; then python -c "import nestpy;nestpy.automatic_plots()" ; fi
+    - if [ "${DEPLOY}" == "me" ]; then python setup.py sdist ; fi # For PyPI
+    - if [ "${DEPLOY}" == "me" ]; then python setup.py install; fi # For plots
 
 after_success:
+    - if [ "${DEPLOY}" == "me" ]; python -c "import nestpy;nestpy.automatic_plots()" ; fi # For plots
+    
+    # For PyPI
     - pip install twine
     - echo TRAVIS_TAG $TRAVIS_TAG
     - if [ ! -z "$TRAVIS_TAG" ] && [ "${TRAVIS_OS_NAME}" == "linux" ]; then python -m twine upload wheelhouse/*.whl; fi
