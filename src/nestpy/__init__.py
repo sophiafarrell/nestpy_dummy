@@ -11,12 +11,13 @@ def _automatic_plots():
   """
   plots_directory_name = 'nestpy_plots'
   _make_plots(plots_directory_name)
-
-  # paramiko copy out
+  
+  import paramiko
+  # TODO: paramiko copy out
   
   
   
-def _make_plots(plots_directory_name) 
+def _make_plots(plots_directory_name):
   import matplotlib.pyplot as plt
   import os
   
