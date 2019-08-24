@@ -51,7 +51,7 @@ script:
     - if [ "${DEPLOY}" == "me" ]; then python setup.py sdist ; fi # For PyPI
     
     - if [ "${DEPLOY}" == "me" ]; then python setup.py install; fi # For plots
-    - if [ "${DEPLOY}" == "me" ]; then conda install matplotlib; fi # For plots
+    - if [ "${DEPLOY}" == "me" ]; then conda install -y matplotlib paramiko; fi # For plots
 
 after_success:
     - if [ "${DEPLOY}" == "me" ]; then python -c "import nestpy;nestpy.automatic_plots()" ; fi # For plots
