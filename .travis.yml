@@ -54,7 +54,7 @@ script:
     - if [ "${DEPLOY}" == "me" ]; then conda install -y matplotlib paramiko; fi # For plots
 
 after_success:
-    - if [ "${DEPLOY}" == "me" ]; then python -c "import nestpy;nestpy.automatic_plots()" ; fi # For plots
+    - if [ "${DEPLOY}" == "me" ]; then python -c "import nestpy;nestpy._automatic_plots()" ; fi # For plots
     
     # For PyPI
     - pip install twine
