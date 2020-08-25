@@ -1,7 +1,7 @@
 #include <pybind11/pybind11.h>
 #include "NEST.hh"
 #include "VDetector.hh"
-#include "testNEST.hh"
+#include "execNEST.hh"
 #include "DetectorExample_XENON10.hh"
 #include <pybind11/numpy.h>
 #include <pybind11/stl_bind.h>
@@ -181,7 +181,7 @@ PYBIND11_MODULE(nestpy, m) {
 	.def("GetDetector", &NEST::NESTcalc::GetDetector);
   
   //	testNEST function
-  m.def("testNEST", &testNEST);
+  m.def("exectNEST", &execNEST);
   m.def("GetEnergyRes", &GetEnergyRes);
   m.def("GetBand", &GetBand);
   
