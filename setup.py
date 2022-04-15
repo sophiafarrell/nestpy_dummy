@@ -83,7 +83,7 @@ setup(
     packages=find_packages(include=['src', 'lib']),
     install_requires=requirements,
     package_dir={'': 'src', 'lib': 'lib'},
-    package_data={'lib': ['lib/*', ]},
+    package_data={'lib': ['lib/pybind11/*', ]},
     ext_modules=[CMakeExtension('nestpy/nestpy')],
     cmdclass=dict(build_ext=CMakeBuild),
     test_suite='tests',
