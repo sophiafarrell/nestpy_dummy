@@ -72,20 +72,22 @@ history = open('HISTORY.md').read().replace('.. :changelog:', '')
 requirements = open('requirements.txt').read().splitlines()
 
 setup(
-    name='nestpy_test',
-    version='1.5.2',
+    name='nestpy',
+    version='1.5.3',
     author='Sophia Farrell',
     author_email='sja5@rice.edu',
     description='Python bindings for the NEST noble element simulations',
     long_description=readme + '\n\n' + history,
     long_description_content_type="text/markdown",
-    packages=find_packages('src'),
+    # Include lib such that recompilation under e.g. different numpy versions works
+    packages=find_packages(include=['src', 'lib']),
     install_requires=requirements,
-    package_dir={'':'src'},
+    package_dir={'': 'src', 'lib': 'lib'},
+    package_data={'lib': ['lib/*', ]},
     ext_modules=[CMakeExtension('nestpy/nestpy')],
     cmdclass=dict(build_ext=CMakeBuild),
     test_suite='tests',
-    zip_safe=False,
+    zip_safe=True,
     include_package_data=True,
     project_urls={
         'nestpy source': 'https://github.com/NESTCollaboration/nestpy',
