@@ -75,12 +75,13 @@ setup(
     name='nestpy-test1',
     version='1.5.6',
     author='Sophia Farrell',
-    author_email='sja5@rice.edu',
+# stop getting emails for a minute
+#    author_email='sja5@rice.edu',
     description='Python bindings for the NEST noble element simulations',
     long_description=readme + '\n\n' + history,
     long_description_content_type="text/markdown",
     # Include lib such that recompilation under e.g. different numpy versions works
-    packages=find_packages(include=['src', 'lib']),
+    packages=find_packages('src'),
     install_requires=requirements,
     package_dir={'': 'src', 'lib': 'lib'},
     package_data={'lib': ['lib/pybind11/*', ]},
