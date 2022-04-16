@@ -84,11 +84,11 @@ setup(
     packages=find_packages('src'),
     install_requires=requirements,
     package_dir={'': 'src', 'lib': 'lib'},
-    package_data={'lib': ['lib/pybind11/*', ]},
+    package_data={'lib': ['lib/*', ]},
     ext_modules=[CMakeExtension('nestpy/nestpy')],
     cmdclass=dict(build_ext=CMakeBuild),
     test_suite='tests',
-    zip_safe=False,
+    zip_safe=True,
     include_package_data=True,
     project_urls={
         'nestpy source': 'https://github.com/NESTCollaboration/nestpy',
