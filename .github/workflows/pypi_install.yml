@@ -18,9 +18,8 @@ on:
   release:
     types: [ published ]
   push:
-# for now debugging
-#    tags:
-#      - '*'
+    tags:
+      - '*'
 
 jobs:
   build:
