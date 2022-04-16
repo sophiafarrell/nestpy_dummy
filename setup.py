@@ -73,7 +73,7 @@ requirements = open('requirements.txt').read().splitlines()
 
 setup(
     name='nestpy-test1',
-    version='1.5.6',
+    version='1.5.7',
     author='Sophia Farrell',
 # stop getting emails for a minute
 #    author_email='sja5@rice.edu',
